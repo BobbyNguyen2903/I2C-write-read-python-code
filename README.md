@@ -209,12 +209,6 @@ write_byte(DEVICE_ADDRESS, 29)
 result = read_byte(DEVICE_ADDRESS)
 print(result)  `
 
-### Giải thích chi tiết code
-
-#### 1. Khai báo thư viện
-
-```python
-from smbus2 import SMBus, i2c_msg
 ```
 
 - **`SMBus`**: Class đại diện cho bus I2C — "người lái xe" điều khiển các tín hiệu điện trên dây.
