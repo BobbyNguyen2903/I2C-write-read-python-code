@@ -90,7 +90,7 @@ sudo reboot
 
 ## Bước 9: Kiểm tra kết nối module
 
-Sau khi reboot, cắm dây module AT24CXX vào Raspberry Pi rồi chạy:
+Sau khi reboot, cắm dây module AT24C02 vào Raspberry Pi rồi chạy:
 
 ```bash
 i2cdetect -y 1
@@ -118,7 +118,7 @@ Raspberry Pi 4 có nhiều đường I2C (`i2c-1`, `i2c-20`, `i2c-21`). Số `1`
 
 **Cơ chế hoạt động của `i2cdetect`:**
 
-Khi chạy, Raspberry Pi gửi tín hiệu Start Bit kèm địa chỉ (ví dụ `0x50`). Nếu có chip AT24CXX đang cắm tại địa chỉ đó, nó sẽ kéo tín hiệu từ `1 → 0` (ACK) để phản hồi, và địa chỉ đó sẽ hiển thị trong bảng. Nếu không có phản hồi thì hiển thị `--`.
+Khi chạy, Raspberry Pi gửi tín hiệu Start Bit kèm địa chỉ (ví dụ `0x50`). Nếu có chip AT24C02 đang cắm tại địa chỉ đó, nó sẽ kéo tín hiệu từ `1 → 0` (ACK) để phản hồi, và địa chỉ đó sẽ hiển thị trong bảng. Nếu không có phản hồi thì hiển thị `--`.
 
 Quá trình này lặp lại từ địa chỉ `0x03` đến `0x77` (tổng cộng 127 lần).
 
@@ -212,7 +212,7 @@ print(result)  `
 ```
 
 - **`SMBus`**: Class đại diện cho bus I2C — "người lái xe" điều khiển các tín hiệu điện trên dây.
-- **`i2c_msg`**: Công cụ tạo ra các "gói hàng" (messages) có cấu trúc tùy chỉnh. AT24CXX yêu cầu gửi địa chỉ ô nhớ theo cách riêng, nên ta cần công cụ này thay vì các hàm đơn giản có sẵn.
+- **`i2c_msg`**: Công cụ tạo ra các "gói hàng" (messages) có cấu trúc tùy chỉnh. AT24C02 yêu cầu gửi địa chỉ ô nhớ theo cách riêng, nên ta cần công cụ này thay vì các hàm đơn giản có sẵn.
 - **`DEVICE_ADDRESS = 0x50`**: "Số nhà" của con chip trên đường bus. Raspberry Pi sẽ phát địa chỉ này lên đường dây để chip phản hồi.
 
 #### 2. Hàm ghi `write_byte`
