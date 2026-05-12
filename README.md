@@ -180,50 +180,34 @@ Tạo file test:
 ```bash
 nano test_eeprom.py
 ```
-
-### Lý do dùng 2 byte địa chỉ (thay vì 1 byte)
-
-- **1 byte (8-bit):** Chỉ đánh địa chỉ từ `0` đến `255` (2⁸ ô nhớ).
-- **2 byte (16-bit):** Đánh địa chỉ từ `0` đến `65,535` (2¹⁶ ô nhớ).
-
-Các dòng chip AT24C32, AT24C64, AT24C256 có dung lượng lớn (từ 32Kbits trở lên), vượt xa 255 ô nhớ. Nhà sản xuất yêu cầu gửi **2 byte địa chỉ** (Byte cao + Byte thấp) để chip biết chính xác ô nhớ nào cần đọc/ghi. Nếu chỉ gửi 1 byte, chip sẽ không hiểu và trả về lỗi `Remote I/O error`.
-
 ### Source code
 
 ```python
 from smbus2 import SMBus, i2c_msg
 import time
 
-DEVICE_ADDRESS = 0x50 
+DEVICE_ADDRESS = 0x50
 
 def write_byte(mem_addr, value):
     with SMBus(1) as bus:
-        # Gửi: [Address MSB, Address LSB, Data]
-        data = [mem_addr >> 8, mem_addr & 0xFF, value]
+        data = [mem_addr & 0xFF, value]          # 
         msg = i2c_msg.write(DEVICE_ADDRESS, data)
         bus.i2c_rdwr(msg)
-        time.sleep(0.01)  # Chờ chip ghi xong
+        time.sleep(0.01)
 
 def read_byte(mem_addr):
     with SMBus(1) as bus:
-        # Bước 1: Gửi địa chỉ muốn đọc (2 byte)
-        write = i2c_msg.write(DEVICE_ADDRESS, [mem_addr >> 8, mem_addr & 0xFF])
-        # Bước 2: Đọc về 1 byte
-        read = i2c_msg.read(DEVICE_ADDRESS, 1)
+        write = i2c_msg.write(DEVICE_ADDRESS, [mem_addr & 0xFF])  # 
+        read  = i2c_msg.read(DEVICE_ADDRESS, 1)
         bus.i2c_rdwr(write, read)
         return list(read)[0]
 
-try:
-    addr = 0x0010  # Thử một địa chỉ bất kỳ
-    val = 88
-    print(f"Ghi {val} vào {addr}...")
-    write_byte(addr, val)
-    
-    print("Đang đọc lại...")
-    result = read_byte(addr)
-    print(f"Kết quả: {result}")
-except Exception as e:
-    print(f"Lỗi rồi: {e}")
+# Ghi
+write_byte(DEVICE_ADDRESS, 29)
+
+# Đọc
+result = read_byte(DEVICE_ADDRESS)
+print(result)  # 
 ```
 
 ### Giải thích chi tiết code
