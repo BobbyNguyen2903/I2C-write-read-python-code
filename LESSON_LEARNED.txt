@@ -1,6 +1,11 @@
-các kiến thức đã học được trong file này bao gồm:
--hiểu về smbus2,i2c_msg
--hiểu và setup được hai hàm write/read cơ bản trong i2c
--biết cách tạo hàm để viết được nhiều hơn là 1 byte trong 1 ô nhớ ( dùng struct )
--hiểu về page boundary/ roll-over và cách viết một mảng liền kề
--hiểu và viết lại được một chương trình hoạt động tương tự với lệnh i2cdetect -y 1
+các kiến thức đã học được bao gồm:
+
+1. Hiểu về smbus2, i2c_msg và cơ chế giao tiếp I2C (Start, Stop, ACK/NACK, Repeated Start)
+2. Phân biệt 3 loại địa chỉ: Device Address, Memory Address, và Start Address
+3. Hiểu và setup được hai hàm write_byte/read_byte cơ bản trong i2c
+4. Tầm quan trọng của time.sleep() khi ghi vào EEPROM (5-10ms write cycle time)
+5. Biết cách dùng struct module để chuyển đổi số lớn thành bytes
+6. Hiểu về page boundary, roll-over và cách thực hiện Page Write (ghi nhiều bytes liên tiếp)
+7. Biết cách tính toán ranh giới trang: page_start = (addr // PAGE_SIZE) * PAGE_SIZE
+8. Viết được chương trình quét I2C Bus Scanner tương tự i2cdetect -y 1
+9. Combined Transaction: hiểu cơ chế ghi→Repeated Start→đọc dữ liệu
