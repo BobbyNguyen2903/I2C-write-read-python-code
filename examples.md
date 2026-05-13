@@ -564,9 +564,3 @@ Kết quả dòng đó:
 
 ---
 
-#### 4. Tóm tắt các hàm định dạng
-
-| Cú pháp | Giải thích |
-|---|---|
-| `f"{addr:02x}"` | `:x` = in kiểu Hex; `2` = luôn in 2 chữ số; `0` = thêm số 0 đằng trước nếu thiếu |
-| `row * 16` | Nhảy từ địa chỉ `0x00` sang `0x10`, `0x20`, `0x30`... — cách tạo bảng cực kỳ thông minh |
