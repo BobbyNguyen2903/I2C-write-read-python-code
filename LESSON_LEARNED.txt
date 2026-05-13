@@ -1,1 +1,6 @@
-
+các kiến thức đã học được trong file này bao gồm:
+-hiểu về smbus2,i2c_msg
+-hiểu và setup được hai hàm write/read cơ bản trong i2c
+-biết cách tạo hàm để viết được nhiều hơn là 1 byte trong 1 ô nhớ ( dùng struct )
+-hiểu về page boundary/ roll-over và cách viết một mảng liền kề
+-hiểu và viết lại được một chương trình hoạt động tương tự với lệnh i2cdetect -y 1
