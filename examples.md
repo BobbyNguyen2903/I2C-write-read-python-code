@@ -71,6 +71,7 @@ print(read_number(DEVICE_ADDRESS))
 ---
 
 #### Phân biệt 3 loại địa chỉ
+-đầu tiên khi bắt đầu một chương trình ta cần phải khai báo 2 thứ quan trọng nhất đó chính là địa chỉ của thiết bị, ô nhớ, như chúng ta có thể thấy, có tới 3 loại address bao gồm DEVICE_ADDR, memory_addr và cuối cùng là start_addr, vậy 3 thằng này khác nhau chỗ nào ? và vai trò nó như nào ?
 
 Khi muốn viết hoặc đọc một bit trong thanh ghi, chúng ta cần biết **địa chỉ thiết bị (Device Address)** và **địa chỉ ô nhớ**. Cũng giống như đặt hàng trên TikTok Shop — bạn cần ghi địa chỉ theo thứ tự: **TP.HCM → Phường/Xã → Địa chỉ nhà/Tên đường**.
 
@@ -262,7 +263,7 @@ Trang 1:  địa chỉ  32 →  63
      page boundary (giữa địa chỉ 31 và 32)
 ```
 
-> ⚠️ **Hiện tượng Roll-over:** Nếu bạn muốn ghi dữ liệu X, Y, Z nhưng lại bắt đầu từ ô 31, sẽ gặp lỗi **roll-over** (ghi đè lên đầu trang hiện tại thay vì sang trang mới).  
+>  **Hiện tượng Roll-over:** Nếu bạn muốn ghi dữ liệu X, Y, Z nhưng lại bắt đầu từ ô 31, sẽ gặp lỗi **roll-over** (ghi đè lên đầu trang hiện tại thay vì sang trang mới).  
 > **Giải pháp:** tính toán địa chỉ trước khi gửi, hoặc chỉ ghi từng byte một (chậm hơn).
 
 **Tại sao có hiện tượng này?** — Đây không phải là lỗi, mà là do thiết kế phần cứng:
@@ -322,7 +323,7 @@ start_addr           = 0x10 = 16
 len([1,2,3,4,5]) - 1 = 4          # byte cuối cách đầu 4 ô
 ô cuối sẽ ghi vào   = 16 + 4 = 20 = 0x14
 
-0x14 > 0x17 ?  → KHÔNG  ✅ an toàn, tiếp tục ghi
+0x14 > 0x17 ?  → KHÔNG   an toàn, tiếp tục ghi
 ```
 
 Ví dụ ghi `[10,20,30,40,50,60,70,80,90]` (9 bytes) từ `0x10`:
@@ -330,7 +331,7 @@ Ví dụ ghi `[10,20,30,40,50,60,70,80,90]` (9 bytes) từ `0x10`:
 ```
 ô cuối sẽ ghi vào = 16 + 8 = 24 = 0x18
 
-0x18 > 0x17 ?  → CÓ  ❌ vượt trang, in cảnh báo và return
+0x18 > 0x17 ?  → CÓ   vượt trang, in cảnh báo và return
 ```
 
 ---
