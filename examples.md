@@ -130,7 +130,9 @@ Thực hiện gửi gói tin đi.
 ```python
 time.sleep(0.01)
 ```
-> ⚠️ **Cực kỳ quan trọng!** Linh kiện phần cứng cần thời gian (khoảng 5–10ms) để "khắc" dữ liệu vào bộ nhớ vật lý. Nếu thiếu, các lệnh ghi liên tiếp sẽ bị mất dữ liệu.
+>  **Cực kỳ quan trọng!** Linh kiện phần cứng cần thời gian (khoảng 5–10ms) để "khắc" dữ liệu vào bộ nhớ vật lý. Nếu thiếu, các lệnh ghi liên tiếp sẽ bị mất dữ liệu.
+>  khi thiếu hàm time.sleep(0.01) thì lập tức chương trình báo lỗi: OSError: [Errno 121] Remote I/O error
+
 
 ---
 
