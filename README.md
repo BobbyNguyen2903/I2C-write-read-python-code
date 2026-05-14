@@ -1,7 +1,7 @@
 # Hướng dẫn cấu hình I2C & giao tiếp EEPROM AT24C02 trên Raspberry Pi (Ubuntu)
 
 Hướng dẫn từng bước cách bật I2C, cài đặt công cụ, và lập trình đọc/ghi module EEPROM AT24C02 trên Raspberry Pi chạy Ubuntu.
-
+ 
 ---
 
 ## Mục lục
