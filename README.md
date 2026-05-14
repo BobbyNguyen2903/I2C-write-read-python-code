@@ -188,16 +188,16 @@ import time
 
 DEVICE_ADDRESS = 0x50
 
-def write_byte(mem_addr, value):
+def write_byte(mem_addr, value): #Hai hàm write/read_byte là hai hàm bắt buộc phải có khi muốn viết hoặc ghi một dữ lieuejk 
     with SMBus(1) as bus:
-        data = [mem_addr & 0xFF, value]          # 
+        data = [mem_addr & 0xFF, value]           
         msg = i2c_msg.write(DEVICE_ADDRESS, data)
         bus.i2c_rdwr(msg)
         time.sleep(0.01)
 
 def read_byte(mem_addr):
     with SMBus(1) as bus:
-        write = i2c_msg.write(DEVICE_ADDRESS, [mem_addr & 0xFF])  # 
+        write = i2c_msg.write(DEVICE_ADDRESS, [mem_addr & 0xFF])   
         read  = i2c_msg.read(DEVICE_ADDRESS, 1)
         bus.i2c_rdwr(write, read)
         return list(read)[0]
@@ -218,12 +218,12 @@ print(result)  `
 #### 2. Hàm ghi `write_byte`
 
 ```python
-data = [mem_addr >> 8, mem_addr & 0xFF, value]
+data = [mem_addr & 0xFF, value]
 ```
 
 | Thành phần | Giải thích |
 |---|---|
-| `mem_addr & 0xFF` | **Address LSB** — giữ lại 8 bit thấp của địa chỉ ô nhớ (1 byte địa chỉ, dùng cho EEPROM dung lượng nhỏ ≤ 256 byte |
+| `mem_addr & 0xFF` | **Địa chỉ ô nhớ và giới hạn byte** — đóng vai trò là một bộ lọc (mask) để đảm bảo tính toàn vẹn của giao thức. |
 | `value` | Dữ liệu muốn ghi |
 | `time.sleep(0.01)` | Chip EEPROM ghi bằng cách thay đổi vật lý electron bên trong, mất ~5–10ms. Nếu không nghỉ, lệnh tiếp theo sẽ bị từ chối (lỗi I/O) |
 
