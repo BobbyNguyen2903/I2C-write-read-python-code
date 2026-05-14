@@ -207,7 +207,7 @@ write_byte(DEVICE_ADDRESS, 29)
 
 # Đọc
 result = read_byte(DEVICE_ADDRESS)
-print(result)  `
+print(result)  
 
 ```
 
