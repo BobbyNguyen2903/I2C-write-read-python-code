@@ -207,7 +207,7 @@ write_byte(DEVICE_ADDRESS, 29)
 
 # Đọc
 result = read_byte(DEVICE_ADDRESS)
-print(result)  
+print(result)   #Có thể ghi các giá trị từ 0 -> 255 tương đương 1 byte ~ 8 bit  
 
 ```
 
@@ -261,3 +261,4 @@ python3 test_eeprom.py
 ```
 
 Một chương trình đúng phải có khả năng **ghi và đọc lại chính xác** dữ liệu mà người dùng đã đặt vào.
+
